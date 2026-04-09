@@ -126,4 +126,217 @@
       font-style: italic;
       color: #e8c88a;
       display: block;
-}
+    }
+
+    .loc-addr {
+      font-size: 0.75rem;
+      color: #5a4e42;
+      margin-top: 0.1rem;
+    }
+
+    .loc-map-btn {
+      font-size: 0.72rem;
+      color: #c9995a;
+      text-decoration: none;
+      border: 1px solid rgba(201,153,90,0.25);
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .loc-map-btn:hover {
+      background: rgba(201,153,90,0.1);
+      border-color: #c9995a;
+    }
+
+    .loc-embed {
+      width: 100%;
+      height: 160px;
+      border: none;
+      display: block;
+      filter: grayscale(30%) brightness(0.85);
+    }
+
+    /* BUTTONS */
+    .buttons {
+      display: flex;
+      gap: 0.8rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      padding: 0.8rem 1.8rem;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s;
+    }
+
+    .btn-yes {
+      background: linear-gradient(135deg, #c9995a, #c47a8a);
+      color: #1a1008;
+      font-weight: 500;
+    }
+
+    .btn-yes:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,153,90,0.3); }
+
+    .btn-no {
+      background: transparent;
+      color: #7a6a58;
+      border: 1px solid rgba(122,106,88,0.3);
+    }
+
+    .btn-no:hover { border-color: #c47a8a; color: #c47a8a; }
+
+    footer {
+      font-family: 'Dancing Script', cursive;
+      font-size: 0.9rem;
+      color: rgba(201,153,90,0.3);
+    }
+
+    /* RESPONSE SCREENS */
+    .response {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #0f0b0e;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      animation: fadeIn 0.5s ease;
+      z-index: 10;
+    }
+
+    .response.active { display: flex; }
+    .response .emoji { font-size: 3rem; margin-bottom: 1rem; }
+
+    .response h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 7vw, 3rem);
+      font-style: italic;
+      color: #f5ead8;
+      margin-bottom: 0.7rem;
+    }
+
+    .response p {
+      font-size: 0.88rem;
+      color: #7a6a58;
+      max-width: 280px;
+      line-height: 1.8;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  </style>
+</head>
+<body>
+
+  <!-- Falling petals -->
+  <div class="petal" style="left:10%; animation-duration:7s; animation-delay:0s;">🌸</div>
+  <div class="petal" style="left:25%; animation-duration:9s; animation-delay:2s;">🌹</div>
+  <div class="petal" style="left:45%; animation-duration:6s; animation-delay:1s;">🌸</div>
+  <div class="petal" style="left:65%; animation-duration:8s; animation-delay:3s;">🌺</div>
+  <div class="petal" style="left:80%; animation-duration:7s; animation-delay:0.5s;">🌸</div>
+  <div class="petal" style="left:55%; animation-duration:10s; animation-delay:4s;">🌹</div>
+  <div class="petal" style="left:35%; animation-duration:8s; animation-delay:5s;">🌸</div>
+  <div class="petal" style="left:90%; animation-duration:6s; animation-delay:2.5s;">🌺</div>
+
+  <!-- Main card -->
+  <div class="card">
+    <span class="bouquet">💐</span>
+    <p class="script">this is for you,</p>
+    <h1>Blake.</h1>
+
+    <p class="message">
+      Would you like to spend an afternoon with me?<br/>
+      Nothing too serious — just good company,<br/>
+      good ice cream, and a nice walk.
+    </p>
+
+    <p class="time">📅 Saturday &nbsp;·&nbsp; 2:00 PM</p>
+
+    <div class="divider"></div>
+
+    <div class="locations">
+
+      <!-- Sweet Revenge -->
+      <div class="loc-card">
+        <div class="loc-header">
+          <span class="loc-icon">🍦</span>
+          <div class="loc-info">
+            <span class="loc-name">Sweet Revenge</span>
+            <div class="loc-addr">Mojo Market, 30 Regent Rd, Sea Point</div>
+          </div>
+          <a class="loc-map-btn" href="https://maps.google.com/?q=Sweet+Revenge+Mojo+Market+Sea+Point+Cape+Town" target="_blank">Open Maps ↗</a>
+        </div>
+        <iframe
+          class="loc-embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&q=place_id:ChIJgU--aDlnzB0RwzMXcdqiSE4&zoom=16">
+        </iframe>
+      </div>
+
+      <!-- Sea Point Promenade -->
+      <div class="loc-card">
+        <div class="loc-header">
+          <span class="loc-icon">🌊</span>
+          <div class="loc-info">
+            <span class="loc-name">Sea Point Promenade</span>
+            <div class="loc-addr">Beach Rd, Sea Point, Cape Town</div>
+          </div>
+          <a class="loc-map-btn" href="https://maps.google.com/?q=Sea+Point+Promenade+Cape+Town" target="_blank">Open Maps ↗</a>
+        </div>
+        <iframe
+          class="loc-embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&q=place_id:ChIJPbtn3yRnzB0RlkvEzyY2FMs&zoom=15">
+        </iframe>
+      </div>
+
+    </div>
+
+    <div class="buttons">
+      <button class="btn btn-yes" onclick="handleYes()">I'd love that 🌸</button>
+      <button class="btn btn-no" onclick="handleNo()">maybe another time</button>
+    </div>
+
+    <footer>made by Abdullah, with love 🌹</footer>
+  </div>
+
+  <!-- Yes screen -->
+  <div class="response" id="yesScreen">
+    <div class="emoji">💐</div>
+    <h2>wonderful.</h2>
+    <p>Sweet Revenge and Sea Point — can't wait. See you Saturday.</p>
+  </div>
+
+  <!-- No screen -->
+  <div class="response" id="noScreen">
+    <div class="emoji">🌸</div>
+    <h2>no worries.</h2>
+    <p>the offer stands whenever you change your mind.</p>
+  </div>
+
+  <script>
+    function handleYes() {
+      document.getElementById('yesScreen').classList.add('active');
+      const msg = encodeURIComponent("Blake said YES! 💐 She's coming to Sweet Revenge & Sea Point on Saturday at 2pm!");
+      setTimeout(() => window.open(`https://wa.me/27780120351?text=${msg}`, '_blank'), 1000);
+    }
+
+    function handleNo() {
+      document.getElementById('noScreen').classList.add('active');
+      const msg = encodeURIComponent("Blake said maybe another time... 🌸");
+      setTimeout(() => window.open(`https://wa.me/27780120351?text=${msg}`, '_blank'), 1000);
+    }
+  </script>
+
+</body>
+</html>
