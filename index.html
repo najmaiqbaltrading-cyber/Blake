@@ -1,0 +1,90 @@
+/* ... existing styles ... */
+    .loc-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: #e8c88a;
+      display: block;
+    }
+
+    .loc-sub {
+      font-size: 0.7rem;
+      color: #7a6e5d;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.8rem;
+      border: 1px solid #c9995a;
+      color: #c9995a;
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: all 0.4s ease;
+      border-radius: 4px;
+    }
+
+    .btn:hover {
+      background: #c9995a;
+      color: #0f0b0e;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="petal" style="left:10%; animation-duration:7s;">🌸</div>
+  <div class="petal" style="left:30%; animation-duration:9s;">✨</div>
+  <div class="petal" style="left:70%; animation-duration:6s;">🌸</div>
+  <div class="petal" style="left:90%; animation-duration:10s;">✨</div>
+
+  <div class="card">
+    <span class="bouquet">💐</span>
+    <p class="script">for the one who blooms</p>
+    <h1>Blake</h1>
+    
+    <div class="divider"></div>
+    
+    <p class="message">
+      A gathering of moments, a celebration of light. <br>
+      Join us as we mark another beautiful chapter.
+    </p>
+
+    <p class="time">April 24 • 7:00 PM</p>
+
+    <div class="locations">
+      <div class="loc-card">
+        <div class="loc-header">
+          <span class="loc-icon">🏛️</span>
+          <div class="loc-info">
+            <span class="loc-name">The Gilded Atrium</span>
+            <span class="loc-sub">The Ceremony</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="loc-card">
+        <div class="loc-header">
+          <span class="loc-icon">🍷</span>
+          <div class="loc-info">
+            <span class="loc-name">Velvet & Vine</span>
+            <span class="loc-sub">The Reception</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#" class="btn">Kindly Respond</a>
+  </div>
+
+  <script>
+    // Simple script to randomize petal start times
+    document.querySelectorAll('.petal').forEach(petal => {
+      petal.style.left = Math.random() * 100 + "vw";
+      petal.style.animationDelay = Math.random() * 5 + "s";
+    });
+  </script>
+</body>
+</html>
