@@ -1,333 +1,1035 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>for Blake 💐</title>
+<title>For Blake 🌹</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400;1,600&family=DM+Sans:wght@300;400&family=Dancing+Script:wght@600&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-*{box-sizing:border-box;margin:0;padding:0;}
-
-html,body{
-min-height:100vh;
-background:#0f0b0e;
-color:#ede0cc;
-font-family:‘DM Sans’,Georgia,sans-serif;
-font-weight:300;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-padding:2rem 1.2rem;
-overflow-x:hidden;
+:root{
+  --bg-base:#0a050d;
+  --bg-surface:#110b17;
+  --bg-elevated:#1a1025;
+  --border:rgba(255,255,255,0.07);
+  --border-strong:rgba(255,255,255,0.14);
+  --text-primary:#f5eef8;
+  --text-secondary:rgba(245,238,248,0.65);
+  --text-muted:rgba(245,238,248,0.35);
+  --accent:#c084e8;
+  --accent2:#e879a0;
+  --accent-glow:rgba(192,132,232,0.25);
+  --accent2-glow:rgba(232,121,160,0.2);
+  --gold:#e8c97a;
+  --glass-bg:rgba(255,255,255,0.045);
+  --glass-border:rgba(255,255,255,0.1);
+  --radius:20px;
 }
 
-/* petals */
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--bg-base);
+  color:var(--text-primary);
+  overflow-x:hidden;
+  line-height:1.7;
+  cursor:none;
+}
+
+@media(pointer:coarse){body{cursor:auto}}
+
+/* ── LOCK SCREEN ── */
+#lock-screen{
+  position:fixed;inset:0;z-index:1000;
+  background:var(--bg-base);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:24px;
+  transition:opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+
+#lock-screen.unlocking{
+  opacity:0;transform:scale(1.04);pointer-events:none;
+}
+
+.lock-rose{
+  font-size:3.5rem;
+  margin-bottom:24px;
+  animation:lockRoseFloat 3s ease-in-out infinite;
+  filter:drop-shadow(0 0 20px rgba(232,121,160,0.5));
+}
+
+@keyframes lockRoseFloat{
+  0%,100%{transform:translateY(0) rotate(-3deg)}
+  50%{transform:translateY(-10px) rotate(3deg)}
+}
+
+.lock-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.6rem,5vw,2.5rem);
+  font-weight:300;
+  color:var(--text-primary);
+  margin-bottom:10px;
+}
+
+.lock-hint{
+  font-size:0.875rem;
+  color:var(--text-muted);
+  margin-bottom:6px;
+  line-height:1.6;
+  max-width:320px;
+}
+
+.lock-hint-2{
+  font-size:0.8rem;
+  color:var(--text-muted);
+  opacity:0;
+  transition:opacity 0.6s ease;
+  margin-bottom:6px;
+  font-style:italic;
+  max-width:320px;
+}
+
+.lock-hint-2.show{opacity:1}
+
+.lock-form{
+  margin-top:28px;
+  display:flex;flex-direction:column;
+  align-items:center;gap:12px;
+  width:100%;max-width:300px;
+}
+
+.lock-input{
+  width:100%;
+  background:rgba(255,255,255,0.05);
+  border:1px solid var(--glass-border);
+  border-radius:12px;
+  padding:14px 20px;
+  color:var(--text-primary);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:1rem;
+  letter-spacing:0.08em;
+  text-align:center;
+  outline:none;
+  transition:border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lock-input:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(192,132,232,0.15);
+}
+
+.lock-input.wrong{
+  border-color:var(--accent2);
+  box-shadow:0 0 0 3px rgba(232,121,160,0.15);
+  animation:shake 0.4s cubic-bezier(0.36,0.07,0.19,0.97);
+}
+
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-8px)}
+  40%{transform:translateX(8px)}
+  60%{transform:translateX(-5px)}
+  80%{transform:translateX(5px)}
+}
+
+.lock-btn{
+  width:100%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  border:none;border-radius:12px;
+  padding:13px 20px;
+  color:#fff;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.9rem;font-weight:600;
+  letter-spacing:0.04em;
+  cursor:pointer;
+  transition:all 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+
+.lock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px var(--accent-glow)}
+.lock-btn:active{transform:translateY(0)}
+
+.lock-wrong-msg{
+  font-size:0.78rem;
+  color:var(--accent2);
+  opacity:0;
+  transition:opacity 0.3s ease;
+  margin-top:-4px;
+}
+
+.lock-wrong-msg.show{opacity:1}
+
+.lock-attempts{
+  font-size:0.72rem;
+  color:var(--text-muted);
+  margin-top:4px;
+}
+
+/* ── CUSTOM CURSOR ── */
+#custom-cursor{
+  position:fixed;pointer-events:none;z-index:9999;
+  font-size:1.4rem;transform:translate(-50%,-50%);
+  display:none;line-height:1;
+  filter:drop-shadow(0 0 6px rgba(232,121,160,0.6));
+  will-change:left,top;
+}
+
+@media(pointer:fine){#custom-cursor{display:block}}
+
+/* ── TOUCH BLOOM ── */
+.touch-bloom{
+  position:fixed;pointer-events:none;z-index:9998;
+  font-size:1.3rem;
+  transform:translate(-50%,-50%) scale(0);
+  animation:bloomPop 0.75s cubic-bezier(0.16,1,0.3,1) forwards;
+  line-height:1;
+}
+
+@keyframes bloomPop{
+  0%{transform:translate(-50%,-50%) scale(0) rotate(-20deg);opacity:1}
+  55%{transform:translate(-50%,-50%) scale(1.35) rotate(10deg);opacity:0.95}
+  100%{transform:translate(-50%,-58px) scale(0.7) rotate(5deg);opacity:0}
+}
+
+/* ── STARS ── */
+#stars-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ── PETALS ── */
 .petal{
-position:fixed;
-font-size:1.1rem;
-opacity:0;
-animation:fall linear infinite;
-pointer-events:none;
-z-index:0;
-}
-@keyframes fall{
-0%  {transform:translateY(-30px) rotate(0deg);opacity:.7;}
-100%{transform:translateY(105vh) rotate(360deg);opacity:0;}
+  position:fixed;opacity:0;
+  animation:petalFall linear infinite;
+  z-index:1;pointer-events:none;will-change:transform;
 }
 
-/* card */
-.card{
-position:relative;
-z-index:1;
-width:100%;
-max-width:400px;
-text-align:center;
-background:rgba(255,255,255,0.02);
-border:1px solid rgba(201,153,90,0.15);
-border-radius:20px;
-padding:2.5rem 1.8rem 2rem;
+@keyframes petalFall{
+  0%{opacity:0;transform:translateY(-40px) translateX(0) rotate(0deg)}
+  10%{opacity:0.55}
+  90%{opacity:0.35}
+  100%{opacity:0;transform:translateY(110vh) translateX(55px) rotate(380deg)}
+}
+
+section{position:relative;z-index:2}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:40px 24px;
+  position:relative;
+}
+
+.hero-eyebrow{
+  font-size:0.72rem;font-weight:500;
+  letter-spacing:0.24em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:18px;
+  opacity:0;animation:fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.2s forwards;
+}
+
+.hero-title-wrap{position:relative;display:inline-block}
+
+.hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(5rem,15vw,11rem);
+  font-weight:300;line-height:1;letter-spacing:-0.03em;
+  background:linear-gradient(135deg,#f5eef8 0%,var(--accent) 40%,var(--accent2) 80%,var(--gold) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  opacity:0;animation:fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.4s forwards;
+  position:relative;z-index:1;
+}
+
+.hero-title-blur{
+  position:absolute;inset:0;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(5rem,15vw,11rem);
+  font-weight:300;line-height:1;letter-spacing:-0.03em;
+  background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:blur(28px);opacity:0.35;pointer-events:none;z-index:0;
+}
+
+/* ── BOUQUET ── */
+.bouquet-wrap{
+  margin-top:28px;opacity:0;
+  animation:fadeUp 1s cubic-bezier(0.16,1,0.3,1) 0.65s forwards;
+  position:relative;display:inline-block;
 }
 
 .bouquet{
-font-size:3rem;
-display:block;
-margin-bottom:1rem;
-animation:sway 3s ease-in-out infinite;
-}
-@keyframes sway{
-0%,100%{transform:rotate(-5deg);}
-50%    {transform:rotate(5deg);}
+  font-size:clamp(5.5rem,18vw,9.5rem);
+  display:block;line-height:1;
+  animation:bouquetFloat 4.2s ease-in-out infinite;
+  filter:drop-shadow(0 0 28px rgba(232,121,160,0.45)) drop-shadow(0 0 55px rgba(192,132,232,0.22));
+  user-select:none;-webkit-user-select:none;cursor:default;
 }
 
-.script{
-font-family:‘Dancing Script’,cursive;
-color:#c9995a;
-font-size:1rem;
-margin-bottom:.4rem;
+@keyframes bouquetFloat{
+  0%,100%{transform:translateY(0) rotate(-2deg) scale(1)}
+  33%{transform:translateY(-12px) rotate(1.5deg) scale(1.02)}
+  66%{transform:translateY(-6px) rotate(-1deg) scale(1.01)}
 }
 
-h1{
-font-family:‘Cormorant Garamond’,Georgia,serif;
-font-size:clamp(2.8rem,11vw,4.5rem);
-font-style:italic;
-font-weight:400;
-color:#f5ead8;
-line-height:1;
-margin-bottom:1.6rem;
+.sparkle{
+  position:absolute;animation:sparkleDrift ease-in-out infinite;
+  opacity:0;font-size:0.85rem;pointer-events:none;
 }
 
-.message{
-font-size:.92rem;
-color:#a89880;
-line-height:1.9;
-margin-bottom:1rem;
+@keyframes sparkleDrift{
+  0%,100%{opacity:0;transform:scale(0.5) translateY(0)}
+  50%{opacity:1;transform:scale(1.1) translateY(-10px)}
 }
 
-.time{
-font-size:.72rem;
-color:#5a4e42;
-letter-spacing:.14em;
-text-transform:uppercase;
-margin-bottom:1.6rem;
+.hero-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1rem,3vw,1.35rem);
+  font-weight:300;font-style:italic;
+  color:var(--text-secondary);
+  margin-top:20px;opacity:0;
+  animation:fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.85s forwards;
+  max-width:440px;
 }
 
-.divider{
-width:40px;
-height:1px;
-background:rgba(201,153,90,0.3);
-margin:0 auto 1.8rem;
+.scroll-hint{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  opacity:0;animation:fadeUp 0.8s ease 1.5s forwards;
 }
 
-/* location cards */
-.locations{
-display:flex;
-flex-direction:column;
-gap:.9rem;
-margin-bottom:2rem;
-text-align:left;
+.scroll-hint span{font-size:0.67rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-muted)}
+
+.scroll-line{
+  width:1px;height:34px;
+  background:linear-gradient(to bottom,var(--accent),transparent);
+  animation:scrollPulse 1.9s ease-in-out infinite;
 }
 
-.loc-card{
-border:1px solid rgba(201,153,90,0.18);
-border-radius:12px;
-overflow:hidden;
-background:rgba(0,0,0,0.2);
+@keyframes scrollPulse{0%,100%{opacity:0.3}50%{opacity:1}}
+
+/* ── SECTION ── */
+.section-inner{max-width:780px;margin:0 auto;padding:90px 24px}
+
+.section-tag{
+  font-size:0.68rem;letter-spacing:0.24em;text-transform:uppercase;
+  color:var(--accent);font-weight:500;margin-bottom:16px;display:block;
 }
 
-.loc-header{
-display:flex;
-align-items:center;
-gap:.6rem;
-padding:.8rem 1rem;
+.section-heading{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,5.5vw,3.2rem);
+  font-weight:300;line-height:1.2;margin-bottom:38px;
+  color:var(--text-primary);
 }
 
-.loc-icon{font-size:1.2rem;flex-shrink:0;}
-.loc-info{flex:1;min-width:0;}
+.section-heading em{font-style:italic;color:var(--accent)}
 
-.loc-name{
-font-family:‘Cormorant Garamond’,Georgia,serif;
-font-size:1rem;
-font-style:italic;
-color:#e8c88a;
-display:block;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis;
+/* ── LETTER ── */
+.letter-section{background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(192,132,232,0.06) 0%,transparent 70%)}
+
+.letter-card{
+  background:var(--glass-bg);border:1px solid var(--glass-border);
+  border-radius:var(--radius);padding:clamp(28px,6vw,54px);
+  position:relative;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  box-shadow:0 0 80px rgba(192,132,232,0.05),inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
-.loc-addr{
-font-size:.7rem;
-color:#5a4e42;
-margin-top:.1rem;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis;
+.letter-card::before{
+  content:'"';position:absolute;top:-8px;left:26px;
+  font-family:'Cormorant Garamond',serif;font-size:7rem;line-height:1;
+  color:var(--accent);opacity:0.11;pointer-events:none;
 }
 
-.loc-map-btn{
-flex-shrink:0;
-font-size:.68rem;
-color:#c9995a;
-text-decoration:none;
-border:1px solid rgba(201,153,90,0.25);
-padding:.2rem .55rem;
-border-radius:20px;
-white-space:nowrap;
+.letter-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.05rem,2.4vw,1.25rem);
+  font-weight:300;line-height:1.95;color:var(--text-secondary);
 }
 
-.loc-embed{
-width:100%;
-height:150px;
-border:none;
-display:block;
-filter:grayscale(20%) brightness(.9) saturate(.8);
+.letter-text p{margin-bottom:1.3em}
+.letter-text p:last-child{margin-bottom:0}
+.letter-text .hl{color:var(--text-primary);font-style:italic}
+
+.letter-sig{
+  margin-top:26px;font-family:'Cormorant Garamond',serif;
+  font-size:1.3rem;font-style:italic;color:var(--accent);
 }
 
-/* buttons */
-.buttons{
-display:flex;
-gap:.8rem;
-justify-content:center;
-margin-bottom:1.8rem;
-flex-wrap:wrap;
+/* ── SONG ── */
+.song-section{background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(232,201,122,0.05) 0%,transparent 70%)}
+
+.song-card{
+  background:var(--glass-bg);border:1px solid var(--glass-border);
+  border-radius:var(--radius);padding:clamp(28px,5vw,48px);
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;gap:20px;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
-.btn{
-padding:.8rem 1.6rem;
-border-radius:100px;
-font-family:‘DM Sans’,sans-serif;
-font-size:.85rem;
-cursor:pointer;
-border:none;
-transition:all .25s;
+.song-note{
+  font-size:2.8rem;
+  animation:noteFloat 2.5s ease-in-out infinite;
+  filter:drop-shadow(0 0 12px rgba(232,201,122,0.5));
 }
 
-.btn-yes{
-background:linear-gradient(135deg,#c9995a,#c47a8a);
-color:#1a1008;
-font-weight:500;
-}
-.btn-yes:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,153,90,.35);}
-
-.btn-no{
-background:transparent;
-color:#7a6a58;
-border:1px solid rgba(122,106,88,.3);
-}
-.btn-no:hover{border-color:#c47a8a;color:#c47a8a;}
-
-footer{
-font-family:‘Dancing Script’,cursive;
-font-size:.88rem;
-color:rgba(201,153,90,.3);
+@keyframes noteFloat{
+  0%,100%{transform:translateY(0) rotate(-5deg)}
+  50%{transform:translateY(-8px) rotate(5deg)}
 }
 
-/* response screens */
-.response{
-display:none;
-position:fixed;
-inset:0;
-background:#0f0b0e;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:2rem;
-z-index:20;
-animation:fadeIn .5s ease;
+.song-label{
+  font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--gold);font-weight:500;
 }
-.response.active{display:flex;}
-.response .emoji{font-size:3rem;margin-bottom:1rem;}
-.response h2{
-font-family:‘Cormorant Garamond’,Georgia,serif;
-font-size:clamp(1.8rem,7vw,3rem);
-font-style:italic;
-color:#f5ead8;
-margin-bottom:.7rem;
-}
-.response p{font-size:.88rem;color:#7a6a58;max-width:280px;line-height:1.8;}
 
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.song-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.5rem,4vw,2.2rem);
+  font-weight:300;color:var(--text-primary);
+  margin-top:-6px;
+}
+
+.song-desc{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1rem,2.2vw,1.15rem);
+  font-weight:300;font-style:italic;
+  color:var(--text-secondary);line-height:1.8;
+  max-width:480px;
+}
+
+.song-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(30,215,96,0.1);border:1px solid rgba(30,215,96,0.25);
+  border-radius:100px;padding:12px 26px;
+  color:#1ed760;font-size:0.875rem;font-weight:600;
+  text-decoration:none;letter-spacing:0.03em;
+  transition:all 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+
+.song-btn:hover{background:rgba(30,215,96,0.18);transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,215,96,0.15)}
+
+.song-btn svg{width:18px;height:18px;fill:currentColor;flex-shrink:0}
+
+/* ── OBSERVATIONS ── */
+.observe-section{background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(232,121,160,0.05) 0%,transparent 70%)}
+
+.observe-list{display:flex;flex-direction:column;gap:16px}
+
+.observe-item{
+  background:var(--glass-bg);border:1px solid var(--glass-border);
+  border-radius:14px;padding:22px 24px;
+  display:flex;gap:18px;align-items:flex-start;
+  transition:all 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+
+.observe-item:hover{
+  border-color:rgba(232,121,160,0.25);
+  transform:translateX(6px);
+  box-shadow:0 8px 32px rgba(232,121,160,0.08);
+}
+
+.observe-icon{font-size:1.3rem;flex-shrink:0;margin-top:2px}
+
+.observe-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1rem,2.2vw,1.18rem);
+  font-weight:300;line-height:1.8;
+  color:var(--text-secondary);
+}
+
+/* ── REASONS ── */
+.reasons-section{background:radial-gradient(ellipse 70% 50% at 50% 50%,rgba(192,132,232,0.04) 0%,transparent 70%)}
+
+.reasons-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+
+.reason-card{
+  background:var(--glass-bg);border:1px solid var(--glass-border);
+  border-radius:16px;padding:26px 22px;
+  transition:all 0.35s cubic-bezier(0.16,1,0.3,1);
+  cursor:default;position:relative;overflow:hidden;
+}
+
+.reason-card::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(192,132,232,0.06) 0%,rgba(232,121,160,0.06) 100%);
+  opacity:0;transition:opacity 0.3s ease;border-radius:16px;
+}
+
+.reason-card:hover{transform:translateY(-5px);border-color:rgba(192,132,232,0.25);box-shadow:0 20px 50px rgba(192,132,232,0.1)}
+.reason-card:hover::after{opacity:1}
+
+.reason-num{
+  font-family:'Cormorant Garamond',serif;font-size:2.3rem;
+  font-weight:300;color:var(--accent);opacity:0.3;line-height:1;margin-bottom:10px;
+}
+
+.reason-text{font-size:0.925rem;color:var(--text-secondary);line-height:1.7}
+
+/* ── TIMELINE ── */
+.timeline-section{background:radial-gradient(ellipse 80% 60% at 50% 100%,rgba(232,201,122,0.04) 0%,transparent 70%)}
+
+.timeline{position:relative;padding-left:32px}
+
+.timeline::before{
+  content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;
+  background:linear-gradient(to bottom,transparent,var(--accent) 20%,var(--accent2) 80%,transparent);
+  opacity:0.4;
+}
+
+.timeline-item{position:relative;padding-bottom:46px}
+.timeline-item:last-child{padding-bottom:0}
+
+.timeline-dot{
+  position:absolute;left:-36px;top:6px;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 12px var(--accent-glow),0 0 24px var(--accent-glow);
+}
+
+.timeline-dot.star{
+  background:var(--gold);
+  box-shadow:0 0 14px rgba(232,201,122,0.5);
+  width:14px;height:14px;left:-38px;top:4px;
+}
+
+.timeline-date{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:6px}
+.timeline-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:var(--text-primary);margin-bottom:6px}
+.timeline-desc{font-size:0.925rem;color:var(--text-secondary);line-height:1.75;max-width:520px}
+
+/* ── COUNTDOWN ── */
+.countdown-section{background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(192,132,232,0.07) 0%,transparent 70%)}
+
+.countdown-card{
+  background:linear-gradient(135deg,rgba(192,132,232,0.08) 0%,rgba(232,121,160,0.08) 100%);
+  border:1px solid rgba(192,132,232,0.2);
+  border-radius:var(--radius);padding:clamp(32px,6vw,56px);
+  text-align:center;position:relative;overflow:hidden;
+}
+
+.countdown-card::before{
+  content:'';position:absolute;top:-60px;left:-60px;
+  width:180px;height:180px;
+  background:radial-gradient(circle,rgba(192,132,232,0.14) 0%,transparent 70%);
+  pointer-events:none;
+}
+
+.countdown-label{
+  font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--accent);font-weight:500;margin-bottom:20px;display:block;
+}
+
+.countdown-heading{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.8rem,4.5vw,2.7rem);
+  font-weight:300;color:var(--text-primary);margin-bottom:32px;
+}
+
+.countdown-grid{
+  display:flex;gap:clamp(12px,4vw,32px);
+  justify-content:center;flex-wrap:wrap;margin-bottom:28px;
+}
+
+.countdown-unit{display:flex;flex-direction:column;align-items:center;gap:8px}
+
+.countdown-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.8rem,8vw,5rem);
+  font-weight:300;line-height:1;
+  background:linear-gradient(135deg,var(--text-primary),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  min-width:80px;text-align:center;
+}
+
+.countdown-unit-label{
+  font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--text-muted);font-weight:500;
+}
+
+.countdown-done{
+  display:none;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.4rem,3.5vw,2rem);
+  font-style:italic;color:var(--accent);
+  animation:fadeUp 0.8s ease forwards;
+}
+
+/* ── SWEET REVENGE ── */
+.revenge-section{background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(232,121,160,0.07) 0%,transparent 70%)}
+
+.revenge-card{
+  background:linear-gradient(135deg,rgba(232,121,160,0.08) 0%,rgba(192,132,232,0.08) 100%);
+  border:1px solid rgba(232,121,160,0.2);
+  border-radius:var(--radius);padding:clamp(32px,6vw,58px);
+  text-align:center;position:relative;overflow:hidden;
+}
+
+.revenge-card::before{content:'';position:absolute;top:-60px;left:-60px;width:180px;height:180px;background:radial-gradient(circle,rgba(232,121,160,0.14) 0%,transparent 70%);pointer-events:none}
+.revenge-card::after{content:'';position:absolute;bottom:-60px;right:-60px;width:180px;height:180px;background:radial-gradient(circle,rgba(192,132,232,0.14) 0%,transparent 70%);pointer-events:none}
+
+.revenge-emoji{font-size:2.8rem;display:block;margin-bottom:16px;animation:gentleBounce 2.8s ease-in-out infinite}
+
+@keyframes gentleBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+.revenge-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,5vw,2.9rem);font-weight:300;margin-bottom:14px;color:var(--text-primary)}
+.revenge-text{font-size:0.975rem;color:var(--text-secondary);max-width:450px;margin:0 auto;line-height:1.8}
+
+/* ── SECRET MESSAGE ── */
+.secret-section{background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(232,201,122,0.06) 0%,transparent 70%)}
+
+.secret-card{
+  background:var(--glass-bg);border:1px solid rgba(232,201,122,0.2);
+  border-radius:var(--radius);padding:clamp(28px,5vw,50px);
+  text-align:center;position:relative;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
+
+.secret-star{font-size:2.5rem;display:block;margin-bottom:16px;animation:starSpin 6s linear infinite}
+
+@keyframes starSpin{0%{transform:rotate(0deg) scale(1)}50%{transform:rotate(180deg) scale(1.1)}100%{transform:rotate(360deg) scale(1)}}
+
+.secret-heading{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.6rem,4vw,2.4rem);
+  font-weight:300;color:var(--gold);margin-bottom:20px;
+}
+
+.secret-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.05rem,2.3vw,1.2rem);
+  font-weight:300;font-style:italic;
+  color:var(--text-secondary);line-height:1.9;
+  max-width:500px;margin:0 auto;
+}
+
+.secret-text .hl{color:var(--text-primary);font-style:normal}
+
+/* ── WHATSAPP CTA ── */
+.cta-section{padding-bottom:0}
+
+.cta-inner{
+  max-width:580px;margin:0 auto;
+  padding:80px 24px 100px;text-align:center;
+}
+
+.cta-heading{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,5vw,3rem);
+  font-weight:300;font-style:italic;
+  color:var(--text-primary);margin-bottom:14px;
+}
+
+.cta-sub{font-size:0.95rem;color:var(--text-secondary);margin-bottom:32px;line-height:1.7}
+
+.wa-btn{
+  display:inline-flex;align-items:center;gap:12px;
+  background:linear-gradient(135deg,#25d366,#128c7e);
+  border:none;border-radius:100px;
+  padding:16px 36px;color:#fff;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.95rem;font-weight:600;
+  text-decoration:none;letter-spacing:0.02em;
+  transition:all 0.25s cubic-bezier(0.16,1,0.3,1);
+  box-shadow:0 8px 32px rgba(37,211,102,0.25);
+}
+
+.wa-btn:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(37,211,102,0.35)}
+.wa-btn:active{transform:translateY(-1px)}
+
+.wa-btn svg{width:22px;height:22px;fill:currentColor;flex-shrink:0}
+
+/* ── FOOTER ── */
+.footer{text-align:center;padding:40px 24px 70px;position:relative;z-index:2}
+
+.footer-heart{font-size:1.9rem;display:block;margin-bottom:13px;animation:heartPulse 1.6s ease-in-out infinite}
+
+@keyframes heartPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+
+.footer-text{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--text-muted)}
+.footer-text span{color:var(--accent)}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 0.75s cubic-bezier(0.16,1,0.3,1),transform 0.75s cubic-bezier(0.16,1,0.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
+
+@media(max-width:580px){
+  .reasons-grid{grid-template-columns:1fr}
+  .countdown-grid{gap:12px}
+  .countdown-num{min-width:60px}
+}
 </style>
-
 </head>
 <body>
 
-<div class="petal" style="left:8%;animation-duration:7s;animation-delay:0s;">🌸</div>
-<div class="petal" style="left:22%;animation-duration:9s;animation-delay:2s;">🌹</div>
-<div class="petal" style="left:44%;animation-duration:6s;animation-delay:1s;">🌸</div>
-<div class="petal" style="left:63%;animation-duration:8s;animation-delay:3s;">🌺</div>
-<div class="petal" style="left:78%;animation-duration:7s;animation-delay:.5s;">🌸</div>
-<div class="petal" style="left:54%;animation-duration:10s;animation-delay:4s;">🌹</div>
-<div class="petal" style="left:33%;animation-duration:8s;animation-delay:5s;">🌸</div>
-<div class="petal" style="left:88%;animation-duration:6s;animation-delay:2.5s;">🌺</div>
+<canvas id="stars-canvas"></canvas>
+<div id="custom-cursor">🌸</div>
 
-<div class="card">
-  <span class="bouquet">💐</span>
-  <p class="script">this is for you,</p>
-  <h1>Blake.</h1>
+<!-- ══ LOCK SCREEN ══ -->
+<div id="lock-screen">
+  <span class="lock-rose" role="img" aria-label="rose">🌹</span>
+  <h1 class="lock-title">This one's locked, Blake.</h1>
+  <p class="lock-hint">The password is something I call you. Or rather — something you call me.</p>
+  <p class="lock-hint-2" id="hint2">Think about that nickname you gave me before we even met.</p>
 
-  <p class="message">
-    Would you like to spend an afternoon with me?<br/>
-    Nothing too serious — just good company,<br/>
-    good ice cream, and a nice walk.
-  </p>
+  <div class="lock-form">
+    <input
+      class="lock-input"
+      id="lock-input"
+      type="text"
+      placeholder="type it..."
+      autocomplete="off"
+      autocorrect="off"
+      autocapitalize="off"
+      spellcheck="false"
+      aria-label="Password"
+    />
+    <button class="lock-btn" id="lock-btn">Open 🌸</button>
+    <p class="lock-wrong-msg" id="wrong-msg">That's not it. Think harder 😏</p>
+    <p class="lock-attempts" id="attempts-msg"></p>
+  </div>
+</div>
 
-  <p class="time">📅 Saturday &nbsp;·&nbsp; 2:00 PM</p>
+<!-- ══ MAIN CONTENT ══ -->
+<div id="main-content" style="display:none">
 
-  <div class="divider"></div>
+<!-- ── HERO ── -->
+<section class="hero">
+  <p class="hero-eyebrow">a little something for</p>
+  <div class="hero-title-wrap">
+    <div class="hero-title-blur" aria-hidden="true">Blake</div>
+    <h1 class="hero-title">Blake</h1>
+  </div>
+  <div class="bouquet-wrap">
+    <span class="sparkle" style="top:5%;left:2%;animation-duration:2.1s;animation-delay:0s">✨</span>
+    <span class="sparkle" style="top:0%;right:8%;animation-duration:2.6s;animation-delay:0.5s">💫</span>
+    <span class="sparkle" style="bottom:8%;left:10%;animation-duration:2.4s;animation-delay:0.9s">🌟</span>
+    <span class="sparkle" style="bottom:2%;right:3%;animation-duration:2s;animation-delay:0.3s">✨</span>
+    <span class="sparkle" style="top:40%;left:-8%;animation-duration:2.8s;animation-delay:1.1s">💫</span>
+    <span class="sparkle" style="top:25%;right:-6%;animation-duration:2.3s;animation-delay:0.7s">🌟</span>
+    <span class="bouquet" role="img" aria-label="bouquet of flowers">💐</span>
+  </div>
+  <p class="hero-sub">from the guy who's been in your DMs since December.</p>
+  <div class="scroll-hint" aria-hidden="true">
+    <span>scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
 
-  <div class="locations">
-
-```
-<div class="loc-card">
-  <div class="loc-header">
-    <span class="loc-icon">🍦</span>
-    <div class="loc-info">
-      <span class="loc-name">Sweet Revenge</span>
-      <div class="loc-addr">Mojo Market, 30 Regent Rd, Sea Point</div>
+<!-- ── LETTER ── -->
+<section class="letter-section">
+  <div class="section-inner">
+    <span class="section-tag reveal">a note</span>
+    <h2 class="section-heading reveal reveal-delay-1">Hey, <em>Blake</em> 🌹</h2>
+    <div class="letter-card reveal reveal-delay-2">
+      <div class="letter-text">
+        <p>So here's what happened. We added each other on Snap in December and then nothing. No messages, no streaks — just two names sitting in each other's contacts for four months like a tab neither of us got around to closing.</p>
+        <p>Then April. And honestly? It's been easy in a way that surprised me. The kind of conversation where you don't have to think too hard about what to say next.</p>
+        <p>I noticed you pretty quickly. The way you talk. The fact that you already gave me a nickname before we've even sat across from each other — <span class="hl">AAP</span>. That tells me something about you.</p>
+        <p>I'm not trying to make this bigger than it is. I just wanted to do something a little different instead of sending another Snap at 11pm. So I built you something.</p>
+        <p>Sweet Revenge is going to be good. I already know it.</p>
+      </div>
+      <div class="letter-sig">— Abdullah (your AAP) 🌸</div>
     </div>
-    <a class="loc-map-btn" href="https://maps.google.com/?q=Sweet+Revenge+Mojo+Market+Sea+Point+Cape+Town" target="_blank">Maps ↗</a>
   </div>
-  <iframe class="loc-embed" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
-    src="https://www.google.com/maps?q=Sweet+Revenge+Mojo+Market+30+Regent+Rd+Sea+Point+Cape+Town&output=embed">
-  </iframe>
-</div>
+</section>
 
-<div class="loc-card">
-  <div class="loc-header">
-    <span class="loc-icon">🌊</span>
-    <div class="loc-info">
-      <span class="loc-name">Sea Point Promenade</span>
-      <div class="loc-addr">Beach Rd, Sea Point, Cape Town</div>
+<!-- ── SONG ── -->
+<section class="song-section">
+  <div class="section-inner">
+    <span class="section-tag reveal">for the drive there</span>
+    <h2 class="section-heading reveal reveal-delay-1">A playlist.<br><em>For you.</em></h2>
+    <div class="song-card reveal reveal-delay-2">
+      <span class="song-note" role="img" aria-label="music note">🎵</span>
+      <span class="song-label">now playing</span>
+      <h3 class="song-title">For you</h3>
+      <p class="song-desc">
+        I put this together thinking about you. Some songs just feel like certain people — and a few of these feel like the version of you I'm still figuring out. Play it whenever.
+      </p>
+      <a class="song-btn" href="https://open.spotify.com/playlist/1TyPrJifzmC2rPjMVAX83b" target="_blank" rel="noopener" aria-label="Open playlist on Spotify">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        Open on Spotify
+      </a>
     </div>
-    <a class="loc-map-btn" href="https://maps.google.com/?q=Sea+Point+Promenade+Cape+Town" target="_blank">Maps ↗</a>
   </div>
-  <iframe class="loc-embed" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
-    src="https://www.google.com/maps?q=Sea+Point+Promenade+Cape+Town&output=embed">
-  </iframe>
-</div>
-```
+</section>
 
+<!-- ── THINGS I NOTICED ── -->
+<section class="observe-section">
+  <div class="section-inner">
+    <span class="section-tag reveal">the small stuff</span>
+    <h2 class="section-heading reveal reveal-delay-1">Things I've<br><em>noticed about you</em></h2>
+    <div class="observe-list">
+      <div class="observe-item reveal">
+        <span class="observe-icon">💬</span>
+        <p class="observe-text">When you're actually into the conversation, your replies come fast. When you're not, they don't. You don't pretend — and I respect that more than you probably think.</p>
+      </div>
+      <div class="observe-item reveal reveal-delay-1">
+        <span class="observe-icon">😏</span>
+        <p class="observe-text">You've got a dry sense of humour that sneaks up on you. You'll say something completely deadpan and then I'm sitting there laughing alone.</p>
+      </div>
+      <div class="observe-item reveal reveal-delay-2">
+        <span class="observe-icon">🌙</span>
+        <p class="observe-text">You gave me a nickname — AAP — before we'd even been in the same room. That's either very comfortable or very bold. I think it's both, and I think that's very you.</p>
+      </div>
+      <div class="observe-item reveal reveal-delay-3">
+        <span class="observe-icon">🎯</span>
+        <p class="observe-text">You're straightforward. You don't dance around things. It makes talking to you genuinely easy — which, for the record, is rarer than people make it out to be.</p>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="buttons">
-    <button class="btn btn-yes" onclick="handleYes()">I'd love that 🌸</button>
-    <button class="btn btn-no" onclick="handleNo()">maybe another time</button>
+<!-- ── REASONS ── -->
+<section class="reasons-section">
+  <div class="section-inner">
+    <span class="section-tag reveal">not a complete list</span>
+    <h2 class="section-heading reveal reveal-delay-1">Things about you<br><em>I can't ignore</em></h2>
+    <div class="reasons-grid">
+      <div class="reason-card reveal reveal-delay-1">
+        <div class="reason-num">01</div>
+        <p class="reason-text">You gave me a nickname before we've even met. That's either really comfortable or really bold. Probably both.</p>
+      </div>
+      <div class="reason-card reveal reveal-delay-2">
+        <div class="reason-num">02</div>
+        <p class="reason-text">You've been in my contacts since December, completely unbothered. You weren't waiting around for anyone — and that's kind of exactly it.</p>
+      </div>
+      <div class="reason-card reveal reveal-delay-3">
+        <div class="reason-num">03</div>
+        <p class="reason-text">The way you hold a conversation. It doesn't feel like we're just filling time. It actually goes somewhere.</p>
+      </div>
+      <div class="reason-card reveal reveal-delay-1">
+        <div class="reason-num">04</div>
+        <p class="reason-text">You picked Sweet Revenge for a first meet-up. Out of everywhere. The name alone tells me your taste is good.</p>
+      </div>
+      <div class="reason-card reveal reveal-delay-2">
+        <div class="reason-num">05</div>
+        <p class="reason-text">You opened this. You're reading it right now. Some part of you was curious — and honestly, same.</p>
+      </div>
+      <div class="reason-card reveal reveal-delay-3">
+        <div class="reason-num">06</div>
+        <p class="reason-text">I built an entire website. For you. That should probably say enough by itself.</p>
+      </div>
+    </div>
   </div>
+</section>
 
-  <footer>made by Abdullah, with love 🌹</footer>
-</div>
+<!-- ── TIMELINE ── -->
+<section class="timeline-section">
+  <div class="section-inner">
+    <span class="section-tag reveal">so far</span>
+    <h2 class="section-heading reveal reveal-delay-1">How we got here —<br><em>slowly, then all at once</em></h2>
+    <div class="timeline reveal reveal-delay-2">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-date">December</p>
+        <h3 class="timeline-title">Added on Snap</h3>
+        <p class="timeline-desc">That was it. A mutual add, some curiosity, and then nothing. Not a bad nothing — just not yet.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-date">December → April</p>
+        <h3 class="timeline-title">Four months in the background</h3>
+        <p class="timeline-desc">We were both just there. Not ignoring each other, not talking either. Somewhere in the middle — which turned out to be fine.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-date">April</p>
+        <h3 class="timeline-title">We started talking</h3>
+        <p class="timeline-desc">And it clicked faster than I expected. You already had a name for me. The conversations didn't feel like work. Still don't.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot star"></div>
+        <p class="timeline-date">Today ✨</p>
+        <h3 class="timeline-title">Sweet Revenge</h3>
+        <p class="timeline-desc">First time we're actually in the same room. I'm looking forward to it more than I'll probably say out loud.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- Yes -->
+<!-- ── COUNTDOWN ── -->
+<section class="countdown-section">
+  <div class="section-inner">
+    <span class="section-tag reveal" style="text-align:center;display:block">the wait</span>
+    <div class="countdown-card reveal reveal-delay-1">
+      <span class="countdown-label">time until Sweet Revenge</span>
+      <h2 class="countdown-heading">It's almost time, Blake</h2>
+      <div class="countdown-grid" id="countdown-grid">
+        <div class="countdown-unit"><span class="countdown-num" id="cd-days">00</span><span class="countdown-unit-label">days</span></div>
+        <div class="countdown-unit"><span class="countdown-num" id="cd-hours">00</span><span class="countdown-unit-label">hours</span></div>
+        <div class="countdown-unit"><span class="countdown-num" id="cd-mins">00</span><span class="countdown-unit-label">minutes</span></div>
+        <div class="countdown-unit"><span class="countdown-num" id="cd-secs">00</span><span class="countdown-unit-label">seconds</span></div>
+      </div>
+      <p class="countdown-done" id="countdown-done">It's today. Go get ready. 🌹</p>
+    </div>
+  </div>
+</section>
 
-<div class="response" id="yesScreen">
-  <div class="emoji">💐</div>
-  <h2>wonderful.</h2>
-  <p>Sweet Revenge and Sea Point — can't wait. See you Saturday.</p>
-</div>
+<!-- ── SWEET REVENGE ── -->
+<section class="revenge-section">
+  <div class="section-inner">
+    <span class="section-tag reveal" style="text-align:center;display:block">the chapter coming next</span>
+    <div class="revenge-card reveal reveal-delay-1">
+      <span class="revenge-emoji" role="img" aria-label="cake">🍰</span>
+      <h2 class="revenge-heading">Sweet Revenge</h2>
+      <p class="revenge-text">Four months of nothing, and now we're meeting here of all places. I don't think the name is a coincidence. Two people who took their time, finally showing up.</p>
+      <p class="revenge-text" style="margin-top:13px">My theory is you're even better in person. Guess we'll find out.</p>
+    </div>
+  </div>
+</section>
 
-<!-- No -->
+<!-- ── SECRET MESSAGE ── -->
+<section class="secret-section">
+  <div class="section-inner">
+    <span class="section-tag reveal" style="text-align:center;display:block">just between us</span>
+    <div class="secret-card reveal reveal-delay-1">
+      <span class="secret-star" role="img" aria-label="star">⭐</span>
+      <h2 class="secret-heading">One more thing.</h2>
+      <p class="secret-text">
+        I know we're at the start of something. I don't know exactly what it is yet — and that's fine. But I think there's something here worth finding out.<br><br>
+        You're <span class="hl">genuinely interesting</span>, Blake. Not just in the way people say that. In the way where I actually want to know more. The nickname, the dry humour, the four months of comfortable silence — all of it.<br><br>
+        So yeah. Today is Sweet Revenge. And I'm glad it is. 🌹
+      </p>
+    </div>
+  </div>
+</section>
 
-<div class="response" id="noScreen">
-  <div class="emoji">🌸</div>
-  <h2>no worries.</h2>
-  <p>the offer stands whenever you change your mind.</p>
-</div>
+<!-- ── WHATSAPP CTA ── -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2 class="cta-heading reveal">So, Blake — you ready?</h2>
+    <p class="cta-sub reveal reveal-delay-1">Sweet Revenge isn't going to enjoy itself. Let's go.</p>
+    <a class="wa-btn reveal reveal-delay-2" href="https://wa.me/27780120351?text=AAP%20I%20opened%20it%20%F0%9F%8C%B9" target="_blank" rel="noopener" aria-label="Message Abdullah on WhatsApp">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Message me on WhatsApp
+    </a>
+  </div>
+</section>
 
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <span class="footer-heart" role="img" aria-label="rose">🌹</span>
+  <p class="footer-text">made for <span>Blake</span> · from AAP</p>
+</footer>
+
+</div><!-- end #main-content -->
+
+<!-- ══ SCRIPTS ══ -->
+
+<!-- Stars -->
 <script>
-function handleYes(){
-  document.getElementById('yesScreen').classList.add('active');
-  var msg=encodeURIComponent("Blake said YES! 💐 She's coming to Sweet Revenge & Sea Point on Saturday at 2pm!");
-  setTimeout(function(){window.open("https://wa.me/27780120351?text="+msg,"_blank");},1000);
-}
-function handleNo(){
-  document.getElementById('noScreen').classList.add('active');
-  var msg=encodeURIComponent("Blake said maybe another time... 🌸");
-  setTimeout(function(){window.open("https://wa.me/27780120351?text="+msg,"_blank");},1000);
+(function(){
+  const canvas=document.getElementById('stars-canvas');
+  const ctx=canvas.getContext('2d');
+  let W,H,stars=[];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+  function init(){stars=[];for(let i=0;i<150;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.1+0.2,speed:0.003+Math.random()*0.004,phase:Math.random()*Math.PI*2})}
+  function draw(t){ctx.clearRect(0,0,W,H);stars.forEach(s=>{const a=0.2+0.6*Math.abs(Math.sin(s.phase+t*s.speed));ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=Math.random()>0.93?`hsla(280,70%,85%,${a})`:`hsla(0,0%,100%,${a})`;ctx.fill()});requestAnimationFrame(draw)}
+  resize();init();requestAnimationFrame(draw);
+  window.addEventListener('resize',()=>{resize();init()});
+})();
+</script>
+
+<!-- Petals -->
+<script>
+(function(){
+  const em=['🌸','🌺','🌷','✿','❀'];
+  for(let i=0;i<10;i++){const p=document.createElement('div');p.className='petal';p.textContent=em[i%em.length];p.style.cssText=`left:${Math.random()*100}vw;font-size:${0.65+Math.random()*0.55}rem;animation-duration:${11+Math.random()*13}s;animation-delay:${Math.random()*14}s;`;document.body.appendChild(p)}
+})();
+</script>
+
+<!-- Lock screen -->
+<script>
+(function(){
+  const PASSWORD='aap';
+  const input=document.getElementById('lock-input');
+  const btn=document.getElementById('lock-btn');
+  const wrongMsg=document.getElementById('wrong-msg');
+  const hint2=document.getElementById('hint2');
+  const attemptsMsg=document.getElementById('attempts-msg');
+  const lockScreen=document.getElementById('lock-screen');
+  const mainContent=document.getElementById('main-content');
+  let attempts=0;
+
+  function unlock(){
+    lockScreen.classList.add('unlocking');
+    setTimeout(()=>{
+      lockScreen.style.display='none';
+      mainContent.style.display='block';
+      initMainFeatures();
+    },800);
+  }
+
+  function tryUnlock(){
+    const val=input.value.trim().toLowerCase();
+    if(val===PASSWORD){unlock();return}
+    attempts++;
+    input.classList.add('wrong');
+    wrongMsg.classList.add('show');
+    setTimeout(()=>{input.classList.remove('wrong')},500);
+    if(attempts>=2)hint2.classList.add('show');
+    if(attempts>=3)attemptsMsg.textContent=`${attempts} tries. Getting closer? 😏`;
+    input.value='';input.focus();
+  }
+
+  btn.addEventListener('click',tryUnlock);
+  input.addEventListener('keydown',e=>{if(e.key==='Enter')tryUnlock()});
+})();
+</script>
+
+<!-- Main features (cursor, touch, countdown, reveal) — init after unlock -->
+<script>
+function initMainFeatures(){
+
+  /* cursor */
+  const cursor=document.getElementById('custom-cursor');
+  if(window.matchMedia('(pointer:fine)').matches){
+    const flowers=['🌸','🌺','🌷','🌼','🌹','💐'];let fi=0;
+    document.addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'});
+    document.addEventListener('click',()=>{fi=(fi+1)%flowers.length;cursor.textContent=flowers[fi];cursor.style.transform='translate(-50%,-50%) scale(1.4)';setTimeout(()=>{cursor.style.transform='translate(-50%,-50%) scale(1)'},200)});
+  }
+
+  /* touch bloom */
+  if(window.matchMedia('(pointer:coarse)').matches){
+    const bl=['🌸','🌺','🌷','🌼','💐','🌹','✿'];let last=0;
+    function spawn(x,y){const el=document.createElement('div');el.className='touch-bloom';el.textContent=bl[Math.floor(Math.random()*bl.length)];el.style.left=x+'px';el.style.top=y+'px';document.body.appendChild(el);el.addEventListener('animationend',()=>el.remove())}
+    document.addEventListener('touchstart',e=>{spawn(e.touches[0].clientX,e.touches[0].clientY)},{passive:true});
+    document.addEventListener('touchmove',e=>{const now=Date.now();if(now-last<130)return;last=now;spawn(e.touches[0].clientX,e.touches[0].clientY)},{passive:true});
+  }
+
+  /* countdown — 11 April 2026 noon */
+  const target=new Date('2026-04-11T12:00:00');
+  const grid=document.getElementById('countdown-grid');
+  const done=document.getElementById('countdown-done');
+  const pad=n=>String(n).padStart(2,'0');
+
+  function tick(){
+    const diff=target-Date.now();
+    if(diff<=0){grid.style.display='none';done.style.display='block';return}
+    const d=Math.floor(diff/864e5);
+    const h=Math.floor((diff%864e5)/36e5);
+    const m=Math.floor((diff%36e5)/6e4);
+    const s=Math.floor((diff%6e4)/1e3);
+    document.getElementById('cd-days').textContent=pad(d);
+    document.getElementById('cd-hours').textContent=pad(h);
+    document.getElementById('cd-mins').textContent=pad(m);
+    document.getElementById('cd-secs').textContent=pad(s);
+  }
+
+  tick();setInterval(tick,1000);
+
+  /* scroll reveal */
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 }
 </script>
 
